@@ -1,0 +1,29 @@
+server:
+    port: 8000
+spring:
+    application:
+        name: wassup-account
+    cloud:
+        nacos:
+            discovery:
+                server-addr:
+                namespace:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url:
+        username: root
+        password:
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 15MB
+    data:
+        redis:
+            host:
+            lettuce:
+                pool:
+                    max-idle: 16
+                    max-active: 32
+                    min-idle: 8
+            password:
+
