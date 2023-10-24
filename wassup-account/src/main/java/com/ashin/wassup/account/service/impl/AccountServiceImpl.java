@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
 import java.time.Duration;
 
 /**
@@ -59,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
 
         // 生成新token
         token = JwtUtil.createToken(loginBO.getUserName());
-        redisTemplate.boundValueOps(loginBO.getUserName()).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME));
+        redisTemplate.boundValueOps(loginBO.getUserName()).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
 
         return token;
     }
@@ -74,8 +73,10 @@ public class AccountServiceImpl implements AccountService {
         Assert.isTrue(JwtUtil.refreshCheck(token), "刷新token失败：非法的token, 请重新登录");
 
         String userName = (String) JWTUtil.parseToken(token).getPayload("userName");
+        Assert.isTrue(token.equals(redisTemplate.boundValueOps(userName).get()), "刷新token失败：非法的token, 请重新登录");
+
         token = JwtUtil.createToken(userName);
-        redisTemplate.boundValueOps(userName).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME));
+        redisTemplate.boundValueOps(userName).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
 
         return token;
     }
