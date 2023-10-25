@@ -1,0 +1,16 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: wassup-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr:
+        namespace:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+
