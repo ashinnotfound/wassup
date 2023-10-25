@@ -2,13 +2,13 @@ package com.ashin.wassup.account.service.impl;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.jwt.JWTUtil;
-import com.ashin.wassup.account.auth.util.JwtUtil;
 import com.ashin.wassup.account.entity.bo.LoginBO;
 import com.ashin.wassup.account.entity.bo.RegisterBO;
 import com.ashin.wassup.account.entity.po.Account;
 import com.ashin.wassup.account.mapper.AccountMapper;
-import com.ashin.wassup.account.service.AccountService;
-import com.ashin.wassup.account.auth.constant.WebSecurityConstant;
+import com.ashin.wassup.account.service.AuthService;
+import com.ashin.wassup.common.auth.constant.WebSecurityConstant;
+import com.ashin.wassup.common.auth.util.JwtUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ import java.time.Duration;
  * @date 2023/10/22
  */
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AuthServiceImpl implements AuthService {
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;

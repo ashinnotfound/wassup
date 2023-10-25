@@ -1,6 +1,6 @@
 package com.ashin.wassup.account.aop;
 
-import com.ashin.wassup.account.result.CommonResult;
+import com.ashin.wassup.common.result.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;

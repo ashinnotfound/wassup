@@ -1,7 +1,7 @@
 package com.ashin.wassup.account.controller;
 
-import com.ashin.wassup.account.result.CommonResult;
-import com.ashin.wassup.account.service.AccountService;
+import com.ashin.wassup.common.result.CommonResult;
+import com.ashin.wassup.account.service.AuthService;
 import com.ashin.wassup.account.entity.bo.LoginBO;
 import com.ashin.wassup.account.entity.bo.RegisterBO;
 import jakarta.annotation.Resource;
@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Resource
-    private AccountService accountService;
+    private AuthService authService;
 
     @PostMapping("/register")
     public CommonResult<Void> register(@RequestBody @Validated RegisterBO registerBO) {
-        accountService.register(registerBO);
+        authService.register(registerBO);
         return CommonResult.operateSuccess("注册成功");
     }
 
     @PostMapping("/login")
     public CommonResult<String> login(@RequestBody @Validated LoginBO loginBO) {
-        return CommonResult.operateSuccess("登陆成功", accountService.login(loginBO));
+        return CommonResult.operateSuccess("登陆成功", authService.login(loginBO));
     }
 
     @PostMapping("/refresh")
     public CommonResult<String> refresh(HttpServletRequest httpServletRequest) {
-        return CommonResult.operateSuccess("刷新token成功", accountService.refreshToken(httpServletRequest));
+        return CommonResult.operateSuccess("刷新token成功", authService.refreshToken(httpServletRequest));
     }
 }

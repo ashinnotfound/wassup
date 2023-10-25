@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * @author ashinnotfound
  * @date 2023/10/22
  */
-public interface AccountService {
+public interface AuthService {
     /**
      * 注册
      *

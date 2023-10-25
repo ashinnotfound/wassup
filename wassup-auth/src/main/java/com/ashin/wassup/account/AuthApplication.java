@@ -7,11 +7,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com/ashin/wassupaccount/mapper")
-public class AccountApplication {
+@MapperScan("com/ashin/wassup/account/mapper")
+public class AuthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccountApplication.class, args);
+		SpringApplication.run(AuthApplication.class, args);
 	}
 
 }
