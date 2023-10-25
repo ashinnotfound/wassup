@@ -1,4 +1,4 @@
-package com.ashin.wassup.account.result;
+package com.ashin.wassup.common.result;
 
 /**
  * CommonResult的code常量
@@ -8,5 +8,8 @@ package com.ashin.wassup.account.result;
  */
 public class ResultCode {
     public static final Integer SUCCESS_CODE = 200;
+
     public static final Integer FAIL_CODE = 400;
+    public static final Integer UNAUTHORIZED = 401;
+    public static final Integer FORBIDDEN = 403;
 }

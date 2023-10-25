@@ -1,4 +1,4 @@
-package com.ashin.wassup.account.auth.constant;
+package com.ashin.wassup.common.auth.constant;
 
 /**
  * 网络安全常数

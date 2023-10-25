@@ -1,4 +1,4 @@
-package com.ashin.wassup.account.result;
+package com.ashin.wassup.common.result;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -35,6 +35,14 @@ public class CommonResult<T> {
 
     public static CommonResult<Void> operateFailWithMessage(String message) {
         return new CommonResult<>(ResultCode.FAIL_CODE, false, message);
+    }
+
+    public static CommonResult<Void> operateFailWithUNAUTHORIZED(){
+        return new CommonResult<>(ResultCode.UNAUTHORIZED, false, "请先登录");
+    }
+
+    public static CommonResult<Void> operateFailWithFORBIDDEN(){
+        return new CommonResult<>(ResultCode.UNAUTHORIZED, false, "你没有访问的权限");
     }
 
     public static CommonResult<Void> operateSuccess(String message) {

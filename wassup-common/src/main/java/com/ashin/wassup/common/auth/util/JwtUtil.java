@@ -1,8 +1,8 @@
-package com.ashin.wassup.account.auth.util;
+package com.ashin.wassup.common.auth.util;
 
 import cn.hutool.json.JSONException;
 import cn.hutool.jwt.JWT;
-import com.ashin.wassup.account.auth.constant.WebSecurityConstant;
+import com.ashin.wassup.common.auth.constant.WebSecurityConstant;
 
 import java.util.Date;
 
