@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class GlobalGatewayFilter implements GlobalFilter, Ordered {
 
-    private final static String WHITE_PATH = "/wassup-account/auth/";
+    private final static String WHITE_PATH = "/wassup-auth/auth/";
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;
