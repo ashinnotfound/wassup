@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
-@ResponseBody
 public class AuthController {
 
     @Resource
