@@ -11,5 +11,6 @@ public class ResultCode {
 
     public static final Integer FAIL_CODE = 400;
     public static final Integer UNAUTHORIZED = 401;
+    public static final Integer EXPIRED_TOKEN = 402;
     public static final Integer FORBIDDEN = 403;
 }

@@ -37,12 +37,16 @@ public class CommonResult<T> {
         return new CommonResult<>(ResultCode.FAIL_CODE, false, message);
     }
 
-    public static CommonResult<Void> operateFailWithUNAUTHORIZED(){
+    public static CommonResult<Void> operateFailWithUNAUTHORIZED() {
         return new CommonResult<>(ResultCode.UNAUTHORIZED, false, "请先登录");
     }
 
-    public static CommonResult<Void> operateFailWithFORBIDDEN(){
-        return new CommonResult<>(ResultCode.UNAUTHORIZED, false, "你没有访问的权限");
+    public static CommonResult<Void> operateFailWithExpiredToken() {
+        return new CommonResult<>(ResultCode.EXPIRED_TOKEN, false, "token已过期, 请刷新或重新登陆");
+    }
+
+    public static CommonResult<Void> operateFailWithFORBIDDEN() {
+        return new CommonResult<>(ResultCode.FORBIDDEN, false, "你没有访问的权限");
     }
 
     public static CommonResult<Void> operateSuccess(String message) {

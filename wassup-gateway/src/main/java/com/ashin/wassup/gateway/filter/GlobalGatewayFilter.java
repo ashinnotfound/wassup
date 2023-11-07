@@ -40,6 +40,8 @@ public class GlobalGatewayFilter implements GlobalFilter, Ordered {
                 if (token.equals(redisTemplate.boundValueOps(userName).get())){
                     return chain.filter(exchange);
                 }
+            } else if (JwtUtil.refreshCheck(token)) {
+                return ResultUtil.printCode(exchange.getResponse(), CommonResult.operateFailWithExpiredToken(), ResultCode.EXPIRED_TOKEN);
             }
         }
 
