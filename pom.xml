@@ -29,6 +29,7 @@
         <module>wassup-gateway</module>
         <module>wassup-auth</module>
         <module>wassup-common</module>
+        <module>wassup-chat</module>
     </modules>
 
     <dependencies>
@@ -72,11 +73,6 @@
                 <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.verison}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
