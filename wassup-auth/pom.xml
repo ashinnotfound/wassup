@@ -9,12 +9,6 @@
 	</parent>
 
 	<artifactId>wassup-auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>wassup-account</name>
-	<description>wassup-account</description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
 
 	<dependencies>
 		<dependency>

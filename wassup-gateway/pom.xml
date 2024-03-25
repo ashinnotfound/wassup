@@ -9,12 +9,6 @@
     </parent>
 
     <artifactId>wassup-gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>wassup-gateway</name>
-    <description>wassup-gateway</description>
-    <properties>
-        <java.version>17</java.version>
-    </properties>
 
     <dependencies>
         <dependency>
