@@ -21,10 +21,10 @@ public class WebSecurityConstant {
     public static final Integer EXPIRE_TIME = 30 * 60 * 1000;
 
     /**
-     * 容忍时间
+     * 容忍时间(s) 1day
      * 在容忍时间内允许更新token
      */
-    public static final Integer LEEWAY = 5 * 60;
+    public static final Integer LEEWAY = 24 * 60 * 60;
 
     public static final String SIGN_KEY = "ayowassup";
 
