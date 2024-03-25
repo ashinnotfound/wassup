@@ -1,6 +1,7 @@
-package com.ashin.wassup.common.result;
+package com.ashin.wassup.gateway.util;
 
 import cn.hutool.json.JSONUtil;
+import com.ashin.wassup.common.result.CommonResult;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 

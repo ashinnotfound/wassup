@@ -7,12 +7,13 @@ import com.ashin.wassup.account.entity.bo.RegisterBO;
 import com.ashin.wassup.account.entity.po.Account;
 import com.ashin.wassup.account.mapper.AccountMapper;
 import com.ashin.wassup.account.service.AuthService;
+import com.ashin.wassup.common.auth.constant.RedisConstant;
 import com.ashin.wassup.common.auth.constant.WebSecurityConstant;
 import com.ashin.wassup.common.auth.util.JwtUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import java.time.Duration;
@@ -27,7 +28,7 @@ import java.time.Duration;
 public class AuthServiceImpl implements AuthService {
 
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource
     private AccountMapper accountMapper;
@@ -49,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
         Assert.notNull(account, "登陆失败：用户不存在");
         Assert.isTrue(DigestUtil.bcryptCheck(loginBO.getPassword() + WebSecurityConstant.SIGN_KEY, account.getPassword()), "登录失败：密码错误");
 
-        String token = redisTemplate.boundValueOps(loginBO.getUserName()).get();
+        String token = stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + account.getId()).get();
 
         // 已经登录过
         if (JwtUtil.legalCheck(token)){
@@ -57,8 +58,8 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // 生成新token
-        token = JwtUtil.createToken(loginBO.getUserName());
-        redisTemplate.boundValueOps(loginBO.getUserName()).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
+        token = JwtUtil.createToken(account.getId());
+        stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + account.getId()).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
 
         return token;
     }
@@ -72,11 +73,11 @@ public class AuthServiceImpl implements AuthService {
 
         Assert.isTrue(JwtUtil.refreshCheck(token), "刷新token失败：非法的token, 请重新登录");
 
-        String userName = (String) JWTUtil.parseToken(token).getPayload("userName");
-        Assert.isTrue(token.equals(redisTemplate.boundValueOps(userName).get()), "刷新token失败：非法的token, 请重新登录");
+        int userId = (int) JWTUtil.parseToken(token).getPayload("userId");
+        Assert.isTrue(token.equals(stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + userId).get()), "刷新token失败：非法的token, 请重新登录");
 
-        token = JwtUtil.createToken(userName);
-        redisTemplate.boundValueOps(userName).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
+        token = JwtUtil.createToken(userId);
+        stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + userId).set(token, Duration.ofMillis(WebSecurityConstant.EXPIRE_TIME + WebSecurityConstant.LEEWAY * 1000));
 
         return token;
     }

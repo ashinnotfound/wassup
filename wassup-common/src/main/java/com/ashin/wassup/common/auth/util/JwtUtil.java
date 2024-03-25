@@ -17,13 +17,13 @@ public class JwtUtil {
     /**
      * 创建令牌
      *
-     * @param userName 用户名
+     * @param userId 用户ID
      * @return {@code String}
      */
-    public static String createToken(String userName) {
+    public static String createToken(Integer userId) {
         Date date = new Date();
         return JWT.create()
-                .setPayload("userName", userName)
+                .setPayload("userId", userId)
                 .setKey(WebSecurityConstant.SIGN_KEY.getBytes())
                 .setIssuer(WebSecurityConstant.ISSUER)
                 .setIssuedAt(date)
