@@ -1,5 +1,6 @@
 package com.ashin.wassup.account.service.impl;
 
+import cn.hutool.core.convert.NumberWithFormat;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.jwt.JWTUtil;
 import com.ashin.wassup.account.entity.bo.LoginBO;
@@ -73,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
 
         Assert.isTrue(JwtUtil.refreshCheck(token), "刷新token失败：非法的token, 请重新登录");
 
-        int userId = (int) JWTUtil.parseToken(token).getPayload("userId");
+        int userId = ((NumberWithFormat)JWTUtil.parseToken(token).getPayload("userId")).intValue();
         Assert.isTrue(token.equals(stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + userId).get()), "刷新token失败：非法的token, 请重新登录");
 
         token = JwtUtil.createToken(userId);
