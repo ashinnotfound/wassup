@@ -45,7 +45,7 @@ public class GlobalGatewayFilter implements GlobalFilter, Ordered {
             if (JwtUtil.legalCheck(token)) {
                 int userId = ((NumberWithFormat)JWTUtil.parseToken(token).getPayload("userId")).intValue();
                 if (token.equals(stringRedisTemplate.boundValueOps(RedisConstant.TOKEN_PREFIX + userId).get())){
-                    exchange.getAttributes().put("userId", userId);
+                    exchange.mutate().request(builder -> builder.header("userId", String.valueOf(userId))).build();
                     return chain.filter(exchange);
                 }
             } else if (JwtUtil.refreshCheck(token)) {
