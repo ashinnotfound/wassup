@@ -1,5 +1,7 @@
 package com.ashin.wassup.account.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -10,7 +12,8 @@ import lombok.Data;
  */
 @Data
 public class Account {
-    private int id;
+    @TableId(type = IdType.AUTO)
+    private Integer id;
     private String userName;
     private String password;
 }

@@ -5,9 +5,11 @@ import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.jwt.JWTUtil;
 import com.ashin.wassup.account.entity.bo.LoginBO;
 import com.ashin.wassup.account.entity.bo.RegisterBO;
+import com.ashin.wassup.account.entity.dto.UserInfoDTO;
 import com.ashin.wassup.account.entity.po.Account;
 import com.ashin.wassup.account.mapper.AccountMapper;
 import com.ashin.wassup.account.service.AuthService;
+import com.ashin.wassup.account.service.UserInfoService;
 import com.ashin.wassup.common.auth.constant.RedisConstant;
 import com.ashin.wassup.common.auth.constant.WebSecurityConstant;
 import com.ashin.wassup.common.auth.util.JwtUtil;
@@ -34,6 +36,9 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     private AccountMapper accountMapper;
 
+    @Resource
+    private UserInfoService userInfoService;
+
     @Override
     public void register(RegisterBO registerBO) {
         Assert.isNull(accountMapper.selectOne(new QueryWrapper<Account>().eq("user_name", registerBO.getUserName())), "注册失败：用户名已存在");
@@ -43,6 +48,8 @@ public class AuthServiceImpl implements AuthService {
         account.setPassword(DigestUtil.bcrypt(registerBO.getPassword() + WebSecurityConstant.SIGN_KEY));
 
         Assert.isTrue(accountMapper.insert(account) == 1, "注册失败：数据库异常");
+
+        userInfoService.addUserInfo(UserInfoDTO.builder().id(account.getId()).userName(account.getUserName()).build());
     }
 
     @Override
