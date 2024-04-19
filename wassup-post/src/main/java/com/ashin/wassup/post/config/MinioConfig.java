@@ -18,6 +18,8 @@ public class MinioConfig {
     private String secretKey;
     @Value("${minio.domain}")
     private String domain;
+    @Value("${minio.expose-domain}")
+    private String exposeDomain;
     @Value("${minio.bucket}")
     private String bucket;
 
@@ -36,6 +38,6 @@ public class MinioConfig {
         }catch (Exception e) {
             log.error("minio初始化失败:{}", e.getMessage());
         }
-        return new MyMinioClient(minioClient, domain, bucket);
+        return new MyMinioClient(minioClient, domain, bucket, exposeDomain);
     }
 }

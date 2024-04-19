@@ -19,11 +19,14 @@ import java.util.Map;
 public class MyMinioClient extends MinioClient {
     private final String domain;
     private final String bucket;
+    private final String exposeDomain;
 
-    public MyMinioClient(MinioClient client, String domain, String bucket) {
+
+    public MyMinioClient(MinioClient client, String domain, String bucket, String exposeDomain) {
         super(client);
         this.domain = domain;
         this.bucket = bucket;
+        this.exposeDomain = exposeDomain;
     }
 
     public boolean upload(InputStream inputStream, long fileSize, String objectName) {
@@ -43,7 +46,7 @@ public class MyMinioClient extends MinioClient {
     }
 
     public String getUrl(String objectName) {
-        return domain + "/" + bucket + "/" + objectName;
+        return exposeDomain + "/" + bucket + "/" + objectName;
     }
 
     public boolean exist(String objectName) {
