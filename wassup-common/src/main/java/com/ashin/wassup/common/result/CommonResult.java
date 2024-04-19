@@ -1,6 +1,7 @@
 package com.ashin.wassup.common.result;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,14 +12,15 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 public class CommonResult<T> {
-    Integer code;
+    private Integer code;
 
-    boolean isSuccess;
+    private boolean isSuccess;
 
-    String message;
+    private String message;
 
-    Object data;
+    private T data;
 
     public CommonResult(Integer code, boolean isSuccess, String message) {
         this.code = code;

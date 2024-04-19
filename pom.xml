@@ -31,6 +31,7 @@
         <module>wassup-common</module>
         <module>wassup-chat</module>
         <module>wassup-post</module>
+        <module>wassup-api</module>
     </modules>
 
     <dependencies>
@@ -53,11 +54,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.ashin</groupId>
-            <artifactId>wassup-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -76,6 +72,16 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.ashin</groupId>
+                <artifactId>wassup-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ashin</groupId>
+                <artifactId>wassup-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-jwt</artifactId>
                 <version>${hutool.version}</version>
@@ -92,14 +98,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
