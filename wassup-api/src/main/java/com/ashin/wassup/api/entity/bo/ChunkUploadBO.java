@@ -1,4 +1,4 @@
-package com.ashin.wassup.post.entity.bo;
+package com.ashin.wassup.api.entity.bo;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class ChunkUploadBO {
     private String md5;
-    private int chunkSize;
+    private Integer chunkSize;
 }

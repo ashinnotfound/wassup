@@ -1,6 +1,6 @@
-package com.ashin.wassup.post.config;
+package com.ashin.wassup.file.config;
 
-import com.ashin.wassup.post.client.MyMinioClient;
+import com.ashin.wassup.file.client.MyMinioClient;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;

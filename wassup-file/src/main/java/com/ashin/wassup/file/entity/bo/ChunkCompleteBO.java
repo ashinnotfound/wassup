@@ -1,4 +1,4 @@
-package com.ashin.wassup.post.entity.bo;
+package com.ashin.wassup.file.entity.bo;
 
 import lombok.Builder;
 import lombok.Data;

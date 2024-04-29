@@ -1,6 +1,6 @@
 package com.ashin.wassup.api.client;
 
-import com.ashin.wassup.api.entity.UserInfoDTO;
+import com.ashin.wassup.api.entity.dto.UserInfoDTO;
 import com.ashin.wassup.common.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

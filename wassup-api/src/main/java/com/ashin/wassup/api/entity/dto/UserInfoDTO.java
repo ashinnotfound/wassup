@@ -1,4 +1,4 @@
-package com.ashin.wassup.api.entity;
+package com.ashin.wassup.api.entity.dto;
 
 import lombok.Data;
 

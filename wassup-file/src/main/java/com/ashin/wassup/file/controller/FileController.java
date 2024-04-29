@@ -1,10 +1,10 @@
-package com.ashin.wassup.post.controller;
+package com.ashin.wassup.file.controller;
 
 import com.ashin.wassup.common.result.CommonResult;
-import com.ashin.wassup.post.entity.bo.ChunkCompleteBO;
-import com.ashin.wassup.post.entity.bo.ChunkUploadBO;
-import com.ashin.wassup.post.entity.bo.UploadBO;
-import com.ashin.wassup.post.service.FileService;
+import com.ashin.wassup.file.entity.bo.ChunkCompleteBO;
+import com.ashin.wassup.file.entity.bo.ChunkUploadBO;
+import com.ashin.wassup.file.entity.bo.UploadBO;
+import com.ashin.wassup.file.service.FileService;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +30,14 @@ public class FileController {
         return CommonResult.operateSuccess("请求分片上传文件成功", fileService.chunkUpload(chunkUploadBO));
     }
 
-    @PostMapping("chunk/{md5}/{uploadId}")
+    @PostMapping("/chunk/{md5}/{uploadId}")
     public CommonResult<Void> chunkCompose(@PathVariable("md5") @NotNull String md5, @PathVariable("uploadId") @NotNull String uploadId) {
         fileService.chunkCompose(ChunkCompleteBO.builder().md5(md5).uploadId(uploadId).build());
         return CommonResult.operateSuccess("合并文件成功");
+    }
+
+    @GetMapping("/{objectName}")
+    public CommonResult<String> getUrl(@PathVariable("objectName") @NotNull String objectName) {
+        return CommonResult.operateSuccess("获取url成功", fileService.getUrl(objectName));
     }
 }

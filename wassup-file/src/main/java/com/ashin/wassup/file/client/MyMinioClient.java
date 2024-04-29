@@ -1,4 +1,4 @@
-package com.ashin.wassup.post.client;
+package com.ashin.wassup.file.client;
 
 import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;

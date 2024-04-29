@@ -1,6 +1,7 @@
 package com.ashin.wassup.post;
 
 import com.ashin.wassup.api.client.AuthFeign;
+import com.ashin.wassup.api.client.FileFeign;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.ashin.wassup.common", "com.ashin.wassup.post"})
 @MapperScan("com/ashin/wassup/post/mapper")
-@EnableFeignClients(clients = AuthFeign.class)
+@EnableFeignClients(clients = {AuthFeign.class, FileFeign.class})
 public class PostApplication {
     public static void main(String[] args) {
         SpringApplication.run(PostApplication.class, args);

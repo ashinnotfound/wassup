@@ -1,10 +1,10 @@
-package com.ashin.wassup.post.service.impl;
+package com.ashin.wassup.file.service.impl;
 
-import com.ashin.wassup.post.client.MyMinioClient;
-import com.ashin.wassup.post.entity.bo.ChunkCompleteBO;
-import com.ashin.wassup.post.entity.bo.ChunkUploadBO;
-import com.ashin.wassup.post.entity.bo.UploadBO;
-import com.ashin.wassup.post.service.FileService;
+import com.ashin.wassup.file.client.MyMinioClient;
+import com.ashin.wassup.file.entity.bo.ChunkCompleteBO;
+import com.ashin.wassup.file.entity.bo.ChunkUploadBO;
+import com.ashin.wassup.file.entity.bo.UploadBO;
+import com.ashin.wassup.file.service.FileService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -53,5 +53,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public void chunkCompose(ChunkCompleteBO chunkCompleteBO) {
         Assert.isTrue(myMinioClient.completeMultipartUpload(chunkCompleteBO.getMd5(), chunkCompleteBO.getUploadId()), "合并分片失败");
+    }
+
+    @Override
+    public String getUrl(String objectName) {
+        Assert.notNull(objectName, "获取链接失败，objectName不能为空");
+        return myMinioClient.getUrl(objectName);
     }
 }

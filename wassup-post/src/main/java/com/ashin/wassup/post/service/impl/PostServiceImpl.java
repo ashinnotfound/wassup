@@ -1,9 +1,9 @@
 package com.ashin.wassup.post.service.impl;
 
 import com.ashin.wassup.api.client.AuthFeign;
-import com.ashin.wassup.api.entity.UserInfoDTO;
+import com.ashin.wassup.api.client.FileFeign;
+import com.ashin.wassup.api.entity.dto.UserInfoDTO;
 import com.ashin.wassup.common.result.CommonResult;
-import com.ashin.wassup.post.client.MyMinioClient;
 import com.ashin.wassup.post.entity.vo.PostVO;
 import com.ashin.wassup.post.mapper.MediaMapper;
 import com.ashin.wassup.post.mapper.PostMapper;
@@ -29,7 +29,7 @@ public class PostServiceImpl implements PostService {
     private MediaMapper mediaMapper;
 
     @Resource
-    private MyMinioClient myMinioClient;
+    private FileFeign fileFeign;
     @Resource
     private AuthFeign authFeign;
 
@@ -89,7 +89,7 @@ public class PostServiceImpl implements PostService {
         PostVO postVO = PostVO.builder()
                 .userId(post.getUserId())
                 .userName(userInfoDTO.getNickName())
-                .userAvatar(myMinioClient.getUrl(userInfoDTO.getAvatar()))
+                .userAvatar(fileFeign.getUrl(userInfoDTO.getAvatar()).getData())
                 .postTime(post.getPostTime())
                 .content(post.getContent())
                 .build();
@@ -98,7 +98,7 @@ public class PostServiceImpl implements PostService {
             List<Media> mediaArrayList = mediaMapper.selectList(new QueryWrapper<Media>().eq("post_id", post.getId()));
             ArrayList<String> urls = new ArrayList<>();
             for(Media media : mediaArrayList) {
-                urls.add(myMinioClient.getUrl(media.getMd5()));
+                urls.add(fileFeign.getUrl(media.getMd5()).getData());
             }
             postVO.setMediaUrls(urls);
         }else {
