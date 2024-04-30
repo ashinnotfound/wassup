@@ -1,7 +1,7 @@
 host: server.ashinnotfound.top
 spring:
   config:
-    import: nacos:wassup-gateway.yml
+    import: nacos:wassup-post.yml
   cloud:
     nacos:
       config:

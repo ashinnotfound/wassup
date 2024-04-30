@@ -1,29 +1,9 @@
-server:
-    port: 8001
+host: server.ashinnotfound.top
 spring:
-    application:
-        name: wassup-auth
+    config:
+        import: nacos:wassup-auth.yml
     cloud:
         nacos:
-            discovery:
-                server-addr:
-                namespace:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url:
-        username: root
-        password:
-    servlet:
-        multipart:
-            max-file-size: 10MB
-            max-request-size: 15MB
-    data:
-        redis:
-            host:
-            lettuce:
-                pool:
-                    max-idle: 16
-                    max-active: 32
-                    min-idle: 8
-            password:
-
+            config:
+                server-addr: ${host}
+                namespace: bf31153c-9b8a-449b-a45d-5d20d0c6f460
