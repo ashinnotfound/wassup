@@ -19,7 +19,6 @@ import java.util.Objects;
  * @date 2023/02/12
  */
 @ControllerAdvice
-@Component
 @Slf4j
 public class GlobalExceptionHandler {
     @ResponseBody
